@@ -1,19 +1,54 @@
+#region VARIABLES
+
 # dictionary with available coins:
-# key is the coin
-# value is the amount of coin available
+# dictionary key is the coin
+# dictionary value is the amount of coin available
 available_coins = {}
 
 
-# function with the inputs to add a coin
+#endregion
+
+
+
+#region IO Functions
+
+# function with the IO to add a coin
 def add_coin_io():
-    coin = int(input("Coin to add:"))
-    amount_of_coin = int(input("Amount of coin to add:"))
+    coin = int(input("Coin to add: "))
+    amount_of_coin = int(input("Amount of coin to add: "))
     return add_coin(coin, amount_of_coin)
+
+
+
+# function with the inputs to give change
+def give_change_io():
+
+    price = int(input("Price of product: "))
+    given_money = int(input("Given money: "))
+
+    while price > given_money:
+        print("Price is bigger than given money.")
+        price = int(input("Price of product: "))
+        given_money = int(input("Given money: "))
+
+    return give_change(price, given_money)
+
+
+# method that prints a coin dictionary
+def print_coin_dict(coin_dict):
+    for key in coin_dict:
+        print(f"{coin_dict[key]} coin(s) of {key}.")
+
+#endregion
+
+
+
+
 
 
 # function to add a coin to available_coins
 def add_coin(coin, amount_of_coin):
-    if available_coins.get(coin) is None:  # if the coin exists but has no value (never happens..)
+    if available_coins.get(coin) is None:  # if the coin exists but has no value (should never happen..)
         available_coins[coin] = amount_of_coin
     else:
         if available_coins[coin] + amount_of_coin < 0:  # if the remaining amount of coins is negative
@@ -23,18 +58,7 @@ def add_coin(coin, amount_of_coin):
     return True
 
 
-# function with the inputs to give change
-def give_change_io():
 
-    price = int(input("Price of product:"))
-    given_money = int(input("Given money:"))
-
-    while price > given_money:
-        print("Price is bigger than given money.")
-        price = int(input("Price of product:"))
-        given_money = int(input("Given money:"))
-
-    return give_change(price, given_money)
 
 
 # function to give change
@@ -65,8 +89,3 @@ def give_change(price, given_money):
     return change_coins
 
 
-# method that prints a coin dictionary
-def print_coin_dict(coin_dict):
-
-    for key in coin_dict:
-        print(f"{coin_dict[key]} coin(s) of {key}.")
